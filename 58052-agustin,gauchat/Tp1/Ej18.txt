@@ -1,4 +1,4 @@
-Nombre:  Pepe Pepito Pepazo, Monto:, Descripcion: a b c d, Forma de pago: contado.
-Nombre: Pepe Pepito, Monto: 9543249, Descripcion: aaaabbbbbb ccccdddd, Forma de pago: efectivo.
-Nombre: Pepe, Monto: 9, Descripcion: aaaabbbbbb, Forma de pago: contado.
-Nombre: Pepe Pepito Pepazo Pepo, Monto: 99, Descripcion:, Forma de pago: efectivo.
+Pepe Pepito Pepazo, 9999, a b c d, contado
+Pepe Pepito, , aaaabbbbbb ccccdddd, efectivo
+Pepe, 9, aaaabbbbbb, contado
+Pepe Pepito Pepazo Pepo, 99, aaaabbbb, efectivo
