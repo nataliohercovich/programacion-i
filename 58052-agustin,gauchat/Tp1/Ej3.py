@@ -1,21 +1,25 @@
-def impar(numero):
-    if numero%2 != 0:
-        return True
+class Numeros():
+    def __init__(self):
+        self.nimpares = []
 
-numeros = []
-try:
-    n = int(input("Ingrese un numero entero positivo\n>>"))
-    if n >= 0:
+    def ver_impar(self, numero):
+        if numero%2 != 0:
+            return True
 
-        for i in range(1, (n + 1)):
-            if impar(i) == True:
-                numeros.append(i)
+    def lista(self, n):
+        if n <= 0:
+            return print("Ingrese numero valido")
+        else:
+            for i in range(1, n+1):
+                if self.ver_impar(i) == True:
+                    self.nimpares.append(i)
 
-        print("Numeros impares: " + str(numeros))
-
-    else:
+def main():
+    numeros = Numeros()
+    try:
+        n = int(input("Ingrese un numero entero positivo\n>>"))
+        numeros.lista(n)
+        print("Numeros impares: " + str(numeros.nimpares))
+    except:
         print("Ingrese un numero valido")
-
-
-except:
-    print("Ingrese un numero valido")
+main()

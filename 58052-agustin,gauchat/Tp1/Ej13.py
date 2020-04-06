@@ -1,17 +1,23 @@
 import random
 
-a = []
-def lista():
-    for i in range(0, 10):
-        a.append(random.randint(1, 10))
-lista()
+class Numeros():
+    def __init__(self):
+        self.a = []
 
-def promediarLista(lista):
-    sum=0.0
-    for i in range(0,len(lista)):
-        sum=sum+lista[i]
- 
-    return sum/len(lista)
+    def lista(self):
+        for i in range(0, 10):
+            self.a.append(random.randint(1, 10))
 
-print("Lista: %s" % a)
-print("El promedio es: %s" % promediarLista(a))
+    def promediarLista(self):
+        sum=0.0
+        for i in range(0,len(self.a)):
+            sum=sum+self.a[i]
+    
+        return sum/len(self.a)
+
+def main():
+    numeros = Numeros()
+    numeros.lista()
+    print("Lista: %s" % numeros.a)
+    print("El promedio es: %s" % numeros.promediarLista())
+main()

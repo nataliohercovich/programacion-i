@@ -1,7 +1,14 @@
-def trig(numero):
-    j = "*"
-    for i in range(0, numero):
-        print(j)
-        j += "*"
+class Piramide():
+    def __init__(self):
+        self.ast = "*"
 
-trig(int(input("Ingrese su numero>> ")))
+    def trig(self, numero):
+        for i in range(0, numero):
+            print(self.ast)
+            self.ast += "*"
+
+def main():
+    piramide = Piramide()
+    piramide.trig(int(input("Ingrese su numero>> ")))
+
+main()

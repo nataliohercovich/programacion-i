@@ -1,15 +1,21 @@
-datos = {'nombre' : None, 'edad' : None, 'direccion' : None, 'telefono' : None}
+class Datos():
+    def __init__(self):
+        self.dato = {'nombre' : None, 'edad' : None, 'direccion' : None, 'telefono' : None}
 
-d = input("Ingrese su nombre: ")
-datos['nombre'] = d
+    def agregar_datos(self, n, e, d, t):
+        self.dato['nombre'] = n
+        self.dato['edad'] = d
+        self.dato['direccion'] = e
+        self.dato['telefono'] = t
 
-d = input("Ingrese su edad: ")
-datos['edad'] = d
+def main():
+    datos = Datos()
+    n = input("Ingrese su nombre: ")
+    d = input("Ingrese su edad: ")
+    e = input("Ingrese su direccion: ")
+    t = input("Ingrese su telefono: ")
 
-d = input("Ingrese su direccion: ")
-datos['direccion'] = d
+    datos.agregar_datos(n, e, d, t)
 
-d = input("Ingrese su telefono: ")
-datos['telefono'] = d
-
-print(datos['nombre'] + " tiene " + datos['edad'] + " años, vie en " + datos['direccion'] + " y su numero de telefono es " + datos['telefono'])
+    print(datos.dato['nombre'] + " tiene " + datos.dato['edad'] + " años, vive en " + datos.dato['direccion'] + " y su numero de telefono es " + datos.dato['telefono'])
+main()
