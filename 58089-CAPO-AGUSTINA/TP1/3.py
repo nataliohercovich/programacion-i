@@ -2,7 +2,7 @@ class Impar():
     def __init__(self):
         self.num = 0
 
-    def ingresar(self):
+    def ingreso(self):
         self.num = int(input("Ingrese un numero entero positivo: "))
 
     def buscar(self):
