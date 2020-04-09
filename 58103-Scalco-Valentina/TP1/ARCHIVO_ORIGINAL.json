@@ -1,14 +1,26 @@
 {
-    "venta numero1": {
-        "nombre": "\"Carlos Perez\"",
-        "monto": "500",
-        "descripcion": "\"venta ramo de rosas\"",
-        "formapago": "\"efectivo\"."
+    "venta numero 1": {
+        "Nombre y Apellido": "Carlos Perez",
+        "Numeor de Tarjeta de Credito": "4587 6985 1452 0304",
+        "Codigo de verificacion": "001",
+        "Tipo de tarjeta de credito": "MasterCard",
+        "Monto de la venta": "$500",
+        "Descripcion de la venta": "Ramo de rosas"
     },
-    "venta numero2": {
-        "nombre": "\"Sandra Fatran\"",
-        "monto": "250",
-        "descripcion": "\"venta caja de chocolates\"",
-        "formapago": "\"tarjeta\"."
+    "venta numero 2": {
+        "Nombre y Apellido": "Sandra Fatran",
+        "Numeor de Tarjeta de Credito": "1234 5678 9101 1121",
+        "Codigo de verificacion": "020",
+        "Tipo de tarjeta de credito": "Visa",
+        "Monto de la venta": "$250",
+        "Descripcion de la venta": "Caja de chocolates"
+    },
+    "venta numero 3": {
+        "Nombre y Apellido": "Almendra Caramelada",
+        "Numeor de Tarjeta de Credito": "1111 2222 3333 4444",
+        "Codigo de verificacion": "300",
+        "Tipo de tarjeta de credito": "Visa",
+        "Monto de la venta": "$150",
+        "Descripcion de la venta": "Globo elio"
     }
 }
