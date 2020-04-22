@@ -140,10 +140,20 @@ class TestCajero(unittest.TestCase):
 
         self.assertEqual(self.cajero3.extraer_dinero_cambio(7000,10),extraccion)
 
+    #Prueba porpia para el porcentaje de cambio
+
+    def test_porcentaje_mayor(self):
+
+        error = "Error. El porcentaje debe ir entre 0 y 100"
+
+        self.assertEqual(self.cajero3.extraer_dinero_cambio(7000,101),error)
+
+    def test_porcentaje_menor(self):
+
+        error = "Error. El porcentaje debe ir entre 0 y 100"
+
+        self.assertEqual(self.cajero3.extraer_dinero_cambio(7000,-1),error)
 
 
 if __name__ == "__main__":
     unittest.main()
-
-
-

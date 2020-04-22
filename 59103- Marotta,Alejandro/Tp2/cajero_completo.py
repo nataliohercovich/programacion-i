@@ -143,72 +143,77 @@ class Cajero():
 
         extraido = 0 #verdadero valor extraido, por si se pasa del valor pedido por falta de cambio
 
-        if bandera == True:      
+        if p_cambio >= 0 and p_cambio <= 100:
 
-            porcentaje  = (monto * p_cambio / 100) 
+            if bandera == True:      
 
-            resto = porcentaje % 100 #sobrante para ser divisible por 100 ej 180 el resto seria 80
+                porcentaje  = (monto * p_cambio / 100) 
 
-            if resto == 0:
+                resto = porcentaje % 100 #sobrante para ser divisible por 100 ej 180 el resto seria 80
 
-                cambio = porcentaje        
+                if resto == 0:
+
+                    cambio = porcentaje        
                  
-            else:
+                else:
             
-                cambio = porcentaje + 100 - resto  # ej 180 + 100 -80 = 200
+                    cambio = porcentaje + 100 - resto  # ej 180 + 100 -80 = 200
 
-            # Lo hago todos mayor a cero para que cuando lo verifique no importe si tiene que entregar 
-            # un billete que supere el valor pedido del cambio
+                # Lo hago todos mayor a cero para que cuando lo verifique no importe si tiene que entregar 
+                # un billete que supere el valor pedido del cambio
        
-            while len(self.aux100) > 0 and cambio > 0: 
+                while len(self.aux100) > 0 and cambio > 0: 
                    
-                cambio = cambio - 100
+                    cambio = cambio - 100
 
-                billete = self.aux100.pop()
+                    billete = self.aux100.pop()
                    
-                lista_cambio.append(billete)
+                    lista_cambio.append(billete)
 
-            while len(self.aux200) > 0 and cambio > 0:
+                while len(self.aux200) > 0 and cambio > 0:
                    
-                cambio = cambio - 200
+                    cambio = cambio - 200
 
-                billete = self.aux200.pop()
+                    billete = self.aux200.pop()
                    
-                lista_cambio.append(billete)
+                    lista_cambio.append(billete)
 
-            while len(self.aux500) > 0 and cambio > 0:
+                while len(self.aux500) > 0 and cambio > 0:
                    
-                cambio = cambio - 500
+                    cambio = cambio - 500
 
-                billete = self.aux500.pop()
+                    billete = self.aux500.pop()
                    
-                lista_cambio.append(billete)
+                    lista_cambio.append(billete)
 
-            while len(self.aux1000) > 0 and cambio > 0:
+                while len(self.aux1000) > 0 and cambio > 0:
                    
-                cambio = cambio - 1000
+                    cambio = cambio - 1000
 
-                billete = self.lista_1000.pop()
+                    billete = self.lista_1000.pop()
                    
-                lista_cambio.append(billete)
+                    lista_cambio.append(billete)
 
 
-            for billete in lista_cambio:
-                extraido  = extraido + billete.valor
+                for billete in lista_cambio:
+                    extraido  = extraido + billete.valor
 
-            monto_restante = monto - extraido #lo que realmente falta sacar
+                monto_restante = monto - extraido #lo que realmente falta sacar
      
-            no_cambio = self.extraer_dinero(monto_restante)
+                no_cambio = self.extraer_dinero(monto_restante)
 
-            if type(no_cambio) == list:
+                if type(no_cambio) == list:
 
-                lista_cambio.extend(no_cambio)
+                    lista_cambio.extend(no_cambio)
             
-            else:
-                return no_cambio
+                else:
+                    return no_cambio
 
-            return lista_cambio
+                return lista_cambio
      
+            else:
+                return bandera
+
         else:
-            return bandera
+            return "Error. El porcentaje debe ir entre 0 y 100"
 
