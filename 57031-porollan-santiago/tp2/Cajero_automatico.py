@@ -25,8 +25,10 @@ class Cajero_automatico():
                             self.valores['500'] + self.valores['1000'])
 
     def extraer_dinero(self, monto):
-        if monto % 100 != 0 or monto > self.valor_total:
-            return "Error. Monto incorrecto"
+        if monto % 100 != 0:
+            return "A"
+        if monto > self.valor_total:
+            return "B"
         billetes = []
         while monto != 0:
             if monto >= 1000 and self.cantidades['1000'] > 0:
@@ -43,7 +45,7 @@ class Cajero_automatico():
                 monto -= 100
             else:
                 self.agregar_dinero(billetes)
-                return "Error. Monto incorrecto"
+                return "C"
         return billetes
 
     def __pop(self, monto):
@@ -52,24 +54,77 @@ class Cajero_automatico():
         self.valor_total -= int(monto)
         return self.almacen_de_billetes[monto].pop(0)
 
+    def extraer_dinero_cambio(self, monto, porcentaje):
+        monto_cambio = int(monto * porcentaje / 100)
+        if porcentaje > 100 or porcentaje < 0:
+            return "D"
+        if monto_cambio % 100 != 0:
+            # mayor a 50, redondea para arriba
+            if (monto_cambio // 50) % 2 == 1:
+                monto_cambio += (100 - int(str(monto_cambio)[-2:]))
+            else:
+                monto_cambio -= int(str(monto_cambio)[-2:])
+        print(monto_cambio)
+        monto = monto - monto_cambio
+        print(monto)
+        billetes = []
+        agregado = 0
+        while monto_cambio != 0:
+            if monto_cambio >= 100 and self.cantidades['100'] > 0:
+                billetes.append(self.__pop('100'))
+                monto_cambio -= 100
+            elif monto_cambio >= 200 and self.cantidades['200'] > 0:
+                billetes.append(self.__pop('200'))
+                monto_cambio -= 200
+            elif monto_cambio >= 500 and self.cantidades['500'] > 0:
+                billetes.append(self.__pop('500'))
+                monto_cambio -= 500
+            elif monto_cambio >= 1000 and self.cantidades['1000'] > 0:
+                billetes.append(self.__pop('1000'))
+                monto_cambio -= 1000
+            else:
+                monto_cambio += 100
+                agregado += 1
+            if agregado == 11:
+                self.agregar_dinero(billetes)
+                return "C"
+        monto -= agregado * 100
+        print(monto)
+        for billete in self.extraer_dinero(monto):
+            if type(billete) is str:
+                self.agregar_dinero(billetes)
+                return billete
+            billetes.append(billete)
+        return billetes
+
 
 if __name__ == '__main__':
     # prueba
     c = Cajero_automatico()
     billetes = []
-    for x in range(10):
+    billetes_de_100 = 0
+    billetes_de_200 = 0
+    billetes_de_500 = 50
+    billetes_de_1000 = 0
+    for x in range(billetes_de_100):
         billete = b.Billete_de_100()
         billetes.append(billete)
-    for x in range(10):
+    for x in range(billetes_de_200):
         billete = b.Billete_de_200()
         billetes.append(billete)
-    for x in range(10):
+    for x in range(billetes_de_500):
         billete = b.Billete_de_500()
         billetes.append(billete)
-    for x in range(10):
+    for x in range(billetes_de_1000):
         billete = b.Billete_de_1000()
         billetes.append(billete)
     c.agregar_dinero(billetes)
     print(c.valor_total)
-    print(c.extraer_dinero(5800))
+
+    # 3500, 2300
+    for billete in c.extraer_dinero(900):
+        try:
+            print(billete.representacion)
+        except AttributeError:
+            print(billete)
     print(c.valor_total)
