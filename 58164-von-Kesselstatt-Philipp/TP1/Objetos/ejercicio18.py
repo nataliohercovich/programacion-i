@@ -35,12 +35,12 @@ class LectorDeVentas():
         self.JSON.close()
 
 
-
+"""
 archivo = "txt.txt"
 ejercicio18 = LectorDeVentas(archivo)
 
 ejercicio18.convertToJSON()
-
+"""
 """
 import os
 os.system("cat " + ejercicio18.path + "txt.json")
