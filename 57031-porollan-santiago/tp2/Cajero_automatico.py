@@ -26,9 +26,9 @@ class Cajero_automatico():
 
     def extraer_dinero(self, monto):
         if monto % 100 != 0:
-            return "A"
+            return "Error. El monto es incorrecto"
         if monto > self.valor_total:
-            return "B"
+            return "Error. Quiero sacar mas dinero de lo que puedo"
         billetes = []
         while monto != 0:
             if monto >= 1000 and self.cantidades['1000'] > 0:
@@ -45,7 +45,7 @@ class Cajero_automatico():
                 monto -= 100
             else:
                 self.agregar_dinero(billetes)
-                return "C"
+                return "Error. No hay una combinacion de billetes que nos permita extraer ese monto"
         return billetes
 
     def __pop(self, monto):
@@ -60,13 +60,8 @@ class Cajero_automatico():
             return "D"
         if monto_cambio % 100 != 0:
             # mayor a 50, redondea para arriba
-            if (monto_cambio // 50) % 2 == 1:
-                monto_cambio += (100 - int(str(monto_cambio)[-2:]))
-            else:
-                monto_cambio -= int(str(monto_cambio)[-2:])
-        print(monto_cambio)
+            monto_cambio += (100 - int(str(monto_cambio)[-2:]))
         monto = monto - monto_cambio
-        print(monto)
         billetes = []
         agregado = 0
         while monto_cambio != 0:
@@ -87,13 +82,13 @@ class Cajero_automatico():
                 agregado += 1
             if agregado == 11:
                 self.agregar_dinero(billetes)
-                return "C"
+                return "Error. No hay una combinacion de billetes que nos permita extraer ese monto"
         monto -= agregado * 100
-        print(monto)
-        for billete in self.extraer_dinero(monto):
-            if type(billete) is str:
-                self.agregar_dinero(billetes)
-                return billete
+        billetes_ext = self.extraer_dinero(monto)
+        if type(billetes_ext) is str:
+            self.agregar_dinero(billetes)
+            return billetes_ext
+        for billete in billetes_ext:
             billetes.append(billete)
         return billetes
 
