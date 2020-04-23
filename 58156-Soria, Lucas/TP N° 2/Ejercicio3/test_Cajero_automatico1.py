@@ -9,11 +9,10 @@ class Cajero_automatico_Test1(unittest.TestCase):
     def setUp(self):
         self.caj = Cajero_automatico()
         self.mil_pesos = Billete_de_1000("pesos", "$")
-        self.caj.agregar_dinero([self.mil_pesos, self.mil_pesos,
-                                 self.mil_pesos, self.mil_pesos,
-                                 self.mil_pesos, self.mil_pesos,
-                                 self.mil_pesos, self.mil_pesos,
-                                 self.mil_pesos, self.mil_pesos])
+        self.lista = []
+        for x in range(10):
+            self.lista.append(self.mil_pesos)
+        self.caj.agregar_dinero(self.lista)
 
     def test_a(self):
         contar = self.caj.contar_dinero()

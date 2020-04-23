@@ -36,6 +36,12 @@ def main():
     print(caj.extraer_dinero(100))
     print(caj.contar_dinero())
     print(caj.extraer_dinero_cambio(7000, 10))
+    print(caj.contar_dinero())
+    caj.agregar_dinero([cien_pesos, dos_pesos, dos_pesos, dos_pesos, dos_pesos,
+                        dos_pesos, mil_pesos, mil_pesos, mil_pesos, mil_pesos,
+                        mil_pesos, mil_pesos, mil_pesos, mil_pesos, mil_pesos,
+                        mil_pesos])
+    print(caj.extraer_dinero_cambio(9000, 10))
 
 
 if __name__ == "__main__":
