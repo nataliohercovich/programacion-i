@@ -101,8 +101,8 @@ if __name__ == '__main__':
     # set up
     c = Cajero_automatico()
     billetes = []
-    billetes_de_100 = 0
-    billetes_de_200 = 0
+    billetes_de_100 = 1
+    billetes_de_200 = 2
     billetes_de_500 = 50
     billetes_de_1000 = 0
     for x in range(billetes_de_100):
