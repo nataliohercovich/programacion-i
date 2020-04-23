@@ -6,8 +6,8 @@ class CajeroAutomatico():
         self.total_dinero = 0
         self.cant_billetes = [
             ['$1000', 0, 1000],
-            ['$500', 50, 500],
-            ['$200', 2, 200],
+            ['$500', 0, 500],
+            ['$200', 0, 200],
             ['$100', 0, 100]
         ]
         self.bill_parcial = {
@@ -74,7 +74,16 @@ class CajeroAutomatico():
     def calcular_cambio(self, por, monto):
         cambio = monto * (por / 100)
         cambio = int(100 * round(float(cambio)/100))
-        print(cambio)
+
+    def get_billetes_parciales(self):
+        listado = []
+        for key in self.bill_parcial:
+            temp = [key, self.bill_parcial[key]]
+            listado.append(temp)
+        return listado
+
+    def get_total_dinero(self):
+        return self.total_dinero
         
 
 
