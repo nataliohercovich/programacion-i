@@ -30,7 +30,7 @@ mil = billete_1000(1000,'pesos','$1000')
 
 class Cajero_automatico(billete_100, billete_200, billete_500, billete_1000 ):
     def __init__(self):
-        self.lista=[cien,cien,cien,cien,cien,cien,cien,cien,cien,cien,doscientos,quinientos,mil]
+        self.lista=[cien,cien,cien,cien,cien,cien,cien,cien,cien,cien,cien,doscientos,doscientos,quinientos,quinientos,quinientos,quinientos,quinientos,mil,mil,mil,mil,mil,mil]
         self.almacen=[]
         self.total = 0
         self.denominacion = []
@@ -46,28 +46,32 @@ class Cajero_automatico(billete_100, billete_200, billete_500, billete_1000 ):
         print(self.almacen)
 
     def contar_dinero(self):
-            
             for item in self.lista:
                 self.total += item.denominacion
             print("La cantidad de dinero disponible en el cajero es de :",self.total)
     
     def extraer_dinero(self):
-        self.monto= int(input("Ingrese la cantidad de dinero que desea retirar :"))
+        self.monto= int(input("Ingrese la cantidad de dinero que desea retirar: "))
         self.cambio= int(input("Ingrese el porcentaje que desea sacar en cambio: "))
     
-        while self.monto > self.total or self.monto %100!=0 :
-            print("No hay dinero suficiente o ingrese un numero multiplo de 100")
+        while self.monto > self.total or self.monto %100!=0 or self.cambio > 100:
+            print("Error.Debe ingresar un monto menor al que hay en el cajero,debe ser multiplo de 100 y no superar el 100 en cambio")
             self.monto= int(input("Ingrese la cantidad de dinero que desea retirar: "))
             self.cambio= int(input("Ingrese el porcentaje que desea sacar en cambio: "))
         
         for item in self.almacen:
             self.denominacion.append(item.denominacion)
             self.denominacion.sort()
-            self.denominacion.reverse()
+        print("\nLista de billetes iniciales:\n", self.denominacion)
+
+        self.denominacion.reverse() 
+        billete1=str(self.denominacion).count('100')
+        billete2=str(self.denominacion).count('200')
+        billete3=str(self.denominacion).count('500')
+        billete4=str(self.denominacion).count('1000')
+        print("\nstock:\n", "\nbilletes de 100:", billete1, "\nbilletes de 200:", billete2, "\nbilletes de 500:", billete3, "\nbilletes de 1000:", billete4)
         
         for i in self.denominacion:
-            
-            
             self.lista1.append(i)
             s=sum(self.lista1)
             if s <= self.monto:
@@ -88,24 +92,19 @@ class Cajero_automatico(billete_100, billete_200, billete_500, billete_1000 ):
                 self.lista2.remove(400)
                 self.lista2.append(200)
                 self.lista2.append(200)
-        print("su vuelto es", self.lista2)        
-
-        billete_auxiliar.nuevo=r
-        self.lista.append(billete_auxiliar)
-        #print(self.lista)
+                
 
         resta=self.total - self.monto
-        print("Dinero disponible en el cajero: ", resta)
+        print("\nDinero disponible en el cajero:\n", resta)
 
     def extraer_dinero_cambio(self):
         x = self.monto
         y = self.cambio
         porcentaje = y * x/100
-        print(porcentaje)
+        print("\nEl monto del dinero en cambio es:\n",porcentaje)
         resta = self.monto - porcentaje
-        print (resta)
+        print ("\nEl resto del dinero solicitado es:\n",resta)
         lista1 = []
-        lista2= []
         lista3 = []
         cambio=[]
         self.denominacion.reverse()
@@ -115,26 +114,16 @@ class Cajero_automatico(billete_100, billete_200, billete_500, billete_1000 ):
             s=sum(lista1)
             if s <= round(porcentaje):
                 cambio.append(i)
-        print(cambio)
+        print("\nLos billetes en cambio son:", cambio)
 
         self.denominacion.reverse()
         for i in self.denominacion:
-            lista2.append(i)
-            s=sum(lista2)
-            if s <= resta:
+            if resta / i >= 1:
+                resta -= i
+              
                 lista3.append(i)
-        lista3.append(100)
-        lista3.sort()
-        lista3.reverse()
-        print(lista3)
+        print("\nEl resto de billetes son:", lista3)
 
-        
-
-
-      
-
-
-billete_auxiliar = Cajero_automatico()
 c = Cajero_automatico()
 c.agregar_dinero()
 c.contar_dinero()
