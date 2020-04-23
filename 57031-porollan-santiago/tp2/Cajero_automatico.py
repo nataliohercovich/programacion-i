@@ -56,12 +56,15 @@ class Cajero_automatico():
 
     def extraer_dinero_cambio(self, monto, porcentaje):
         monto_cambio = int(monto * porcentaje / 100)
+
+        # redondear
         if porcentaje > 100 or porcentaje < 0:
             return "D"
         if monto_cambio % 100 != 0:
-            # mayor a 50, redondea para arriba
             monto_cambio += (100 - int(str(monto_cambio)[-2:]))
         monto = monto - monto_cambio
+
+        # extraer
         billetes = []
         agregado = 0
         while monto_cambio != 0:
@@ -95,6 +98,7 @@ class Cajero_automatico():
 
 if __name__ == '__main__':
     # prueba
+    # set up
     c = Cajero_automatico()
     billetes = []
     billetes_de_100 = 0
@@ -116,10 +120,12 @@ if __name__ == '__main__':
     c.agregar_dinero(billetes)
     print(c.valor_total)
 
-    # 3500, 2300
-    for billete in c.extraer_dinero(900):
+    # extraccion
+    billetes_ext = c.extraer_dinero(900)
+    for billete in billetes_ext:
         try:
             print(billete.representacion)
         except AttributeError:
-            print(billete)
+            print(billetes_ext)
+            break
     print(c.valor_total)
