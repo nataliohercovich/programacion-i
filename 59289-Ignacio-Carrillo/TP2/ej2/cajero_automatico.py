@@ -29,12 +29,13 @@ class Cajero_automatico():
                     monto-=billete.denominacion
                     entrega_billete.append(billete)
                 else:
-                    print("\n**ERROR** No se pudo satisfacer la extraccion por falta de billetes")
+                    print("\n**ERROR** No se puede entregar la combinacion de billetes necesaria")
                     self.almacen_interno=copy.deepcopy(copia_seguridad)
                     return 1
 
         else:
             print("\n**ERROR**Cantidad de dinero insuficente en cajero")
+            return 1
         
         return entrega_billete
         
