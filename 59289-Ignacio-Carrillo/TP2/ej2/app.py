@@ -26,6 +26,27 @@ class Api():
                 os.system("clear clc")
                 while True:
                     try:
+                        monto=int(input("\nIngrese el monto a extraer: "))
+                        if(monto%100!=0):
+                            raise ValueError #si el monto no es multiplo de 100
+                        else:
+                            entrega=self.cajero.extraer_dinero(monto)
+                            total=0
+                            if(type(entrega) is list):
+                                print("\nBilletes entregados: ")
+                                for i in range(len(entrega)):
+                                    print(entrega[i].denominacion)
+                                    total+=entrega[i].denominacion
+                                print("\nTotal entregado: ${}".format(total))
+                                break
+                            else:
+                                break
+                    except ValueError:
+                        print("\n**ERROR**Debe extraer un multiplo de 100")
+            elif(menu == 4):
+                os.system("clear clc")
+                while True:
+                    try:
                         monto = int(input("\nIngrese el monto a extraer: "))
                         if(monto % 100 != 0):
                             raise ValueError  # si el monto no es multiplo de 100
@@ -59,7 +80,7 @@ class Api():
                                 break
                     except ValueError:
                         print("\n**ERROR**Debe extraer un multiplo de 100")
-            elif(menu == 4):
+            elif(menu == 5):
                 os.system("clear clc")
                 parcial, total = self.cajero.contar_dinero()
                 print("Montos Parciales:")
@@ -112,11 +133,13 @@ class Api():
                 1- Cargar cajero
                 2- Vaciar cajero
                 3- Extraer dinero
-                4- Contar dinero cajero
+                4- Extraer dinero con cambio
+                5- Contar dinero cajero
+
                 0- Salir
                                     
                 Eleccion: """))
-                if(eleccion != 1 and eleccion != 2 and eleccion!=3 and eleccion!=4 and eleccion!=0):
+                if(eleccion != 1 and eleccion != 2 and eleccion!=3 and eleccion!=4 and eleccion!=5 and eleccion!=0):
                     raise ValueError
                 else:
                     break
