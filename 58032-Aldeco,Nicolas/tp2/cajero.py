@@ -1,4 +1,5 @@
 from billetes import *
+from math import ceil
 
 
 class CajeroAutomatico():
@@ -49,17 +50,15 @@ class CajeroAutomatico():
                         self.bill_parcial[elem[0]] -= elem[2]
                         self.extraccion.append(elem[0])
             num += 1
-# ej2
 
-
+#   *~ Ejericicio N2 ~*
     def extraer_dinero_cambio(self, monto, por):
-        self.correct_input(monto)
         if (101 > por > 0) is False:
             raise Exception('El rango de porcentaje de cambio puede solo ir de 0 a 100')
         por = por/100
-        cambio = monto * por
-        self.calcular_cambio(por, cambio)
-        self.extraer_dinero(int(monto))
+        cambio = self.calcular_cambio(por, monto)
+        monto = monto - cambio
+        self.extraer_dinero(int(monto), False)
         self.extraer_dinero(int(cambio), True)
 
     def correct_input(self, monto):
@@ -70,11 +69,40 @@ class CajeroAutomatico():
         caja = self.total_dinero,
         ext = monto
         ))
+        if self.comb(monto) is False:
+            raise Exception('No hay una combinacion de billetes posible')
+
+    def comb(self, monto):
+        copy_b = self.cant_billetes
+        num = 0
+        m_init = monto
+        test = 0
+        for elem in copy_b:
+            if monto != 0:
+                if elem[1] != 0:
+                    temp = int(monto/elem[2])
+                    if elem[1] < temp:
+                        rg = elem[1]
+                    else:
+                        rg = temp
+                    for i in range(rg):
+                        monto -= elem[2]
+                        test += elem[2]
+            num += 1
+        if m_init != test:
+            return False
+        return True
 
     def calcular_cambio(self, por, monto):
-        cambio = monto * (por / 100)
-        cambio = int(100 * round(float(cambio)/100))
+        cambio = monto * por
+        if cambio < 1000:
+            cambio = ceil(cambio/1000)
+            return cambio * 1000
+        elif cambio < 10000:
+            cambio = ceil(cambio/10000)
+            return cambio * 1000
 
+#   *~ Gets de datos ~*
     def get_billetes_parciales(self):
         listado = []
         for key in self.bill_parcial:
@@ -82,24 +110,19 @@ class CajeroAutomatico():
             listado.append(temp)
         return listado
 
+    def get_cant_billetes(self):
+        listado = []
+        for line in self.cant_billetes:
+            temp = [line[0], line[1]]
+            listado.append(temp)
+        return listado
+
     def get_total_dinero(self):
         return self.total_dinero
-        
+
+    def get_extra(self):
+        return self.extraccion
 
 
 if __name__ == "__main__":
-    objeto = CajeroAutomatico()
-    # objeto.agregar_dinero([
-    #     Bill_100(),Bill_100(),Bill_1000(),Bill_200(),Bill_500(),Bill_1000(),
-    #     Bill_100(),Bill_100(),Bill_1000(),Bill_200(),Bill_500(),Bill_1000(),
-    #     Bill_100(),Bill_100(),Bill_1000(),Bill_200(),Bill_500(),Bill_1000(),
-    #     Bill_100(),Bill_100(),Bill_1000(),Bill_200(),Bill_500(),Bill_1000(),
-    #     Bill_100(),Bill_100(),Bill_1000(),Bill_200(),Bill_500(),Bill_1000(),
-    #     Bill_100(),Bill_100(),Bill_1000(),Bill_200(),Bill_500(),Bill_1000()
-    # ])
-    objeto.contar_dinero()
-#    objeto.extraer_dinero(1400)
-    objeto.extraer_dinero_cambio(3600, 5)
-    print(objeto.extraccion)
-    print(objeto.bill_parcial)
-    print(objeto.cant_billetes)
+    pass
