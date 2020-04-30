@@ -43,9 +43,6 @@ class Atm:
     def extraer_dinero(self, monto):
         disponible =[len(self.billetes1k), len(self.billetes500),
                     len(self.billetes200), len(self.billetes100)]
-        '''if percentage < 100 or percentage > 0:
-            percentage = math.trunc(monto * percentage / 100)
-            monto = monto - percentage'''
         retiro = 0
         cant = 0
         i = 0

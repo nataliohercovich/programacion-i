@@ -34,7 +34,7 @@ class Atm:
                 valor = 500
             if x == 3:
                 valor = 1000
-            string = (str(billete[x]), " billetes de $", str(valor))
+            string = (str(billete[x]) + " billetes de $" + str(valor))
             count_bills.append(string)
         self.total = (billete[0]*100 + billete[1]*200 + billete[2]*500 + billete[3]*1000)
         return(count_bills)
@@ -76,7 +76,8 @@ class Atm:
                     for i in range(cant):
                         disponible[3] -= 1
                     retiro += cant * 100
-                print("Billetes extraidos ", retiro)       
+                print("Billetes extraidos ", retiro) 
+                return retiro      
             else:
                 print("Monto no válido, ingrese un monto multiplo de 100")
         else:
