@@ -1,0 +1,7 @@
+Enzo Ponce,$100000,Pc gamer,tarjeta
+Damian Ponce,$5000,celular,contado
+Luciana Giamportone,$50000,notebook,contado
+Emanuel Cubisino,$40000,celular,contado
+
+
+
