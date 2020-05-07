@@ -21,7 +21,6 @@ class Cajero_automatico:
         self.billetes_quinientos = []
         self.billetes_doscientos = []
         self.billetes_cien = []
-        self.total = 0
 
     def agregar_dinero(self, lista_billetes):
         for x in lista_billetes:
@@ -35,38 +34,30 @@ class Cajero_automatico:
                 self.billetes_mil.append(x)
 
     def contar_dinero(self):
+        texto = ""
+        lista = [1000, 500, 200, 100]
+        parcial = []
         billetes = [len(self.billetes_mil), len(self.billetes_quinientos),
                     len(self.billetes_doscientos), len(self.billetes_cien)]
-        parcial = [1000 * billetes[0], 500 * billetes[1],
-                   200 * billetes[2], 100 * billetes[3]]
-        texto = ""
+        parcial = [lista[x] * billetes[x] for x in range(len(billetes))]
         for x in range(len(billetes)):
             if billetes[x] != 0:
                 texto += "{} billetes de ".format(billetes[x])
-                if x == 0:
-                    valor = 1000
-                elif x == 1:
-                    valor = 500
-                elif x == 2:
-                    valor = 200
-                else:
-                    valor = 100
-                texto += "${}, ".format(valor)
-                texto += "parcial ${}\n".format(parcial[x])
+                texto += "${}, parcial ${}\n".format(lista[x], parcial[x])
         texto += "Total: ${}".format(sum(i for i in parcial))
         return texto
 
     def extraer_dinero(self, monto):
         dar = [0, 0, 0, 0]
         billetes = []
+        lista = [1000, 500, 200, 100]
         dispo = [len(self.billetes_mil),
                  len(self.billetes_quinientos),
                  len(self.billetes_doscientos),
                  len(self.billetes_cien)]
-        self.total = dispo[0] * 1000 + dispo[1] * 500
-        self.total += dispo[2] * 200 + dispo[3] * 100
+        total = sum(i for i in [lista[x]*dispo[x] for x in range(len(lista))])
         try:
-            if monto > self.total:
+            if monto > total:
                 raise CantidadError
         except CantidadError:
             return "Error. Quiero sacar mas dinero de lo que puedo"
@@ -75,7 +66,6 @@ class Cajero_automatico:
                 raise MultiplicidadError
         except MultiplicidadError:
             return "Error. El monto es incorrecto"
-        lista = [1000, 500, 200, 100]
         for x in range(len(lista)):
             billetes.append(math.trunc(monto/lista[x]))
             monto = monto % lista[x]
@@ -95,11 +85,10 @@ class Cajero_automatico:
                     billetes[x] -= 1
                 else:
                     try:
-                        if x == 0 or x == 2:
+                        if x != 3:
                             billetes[x+1] += 2 * billetes[x]
-                        elif x == 1:
-                            billetes[x+1] += 2 * billetes[x]
-                            billetes[x+2] += billetes[x]
+                            if x == 1:
+                                billetes[x+2] += billetes[x]
                         else:
                             raise BilleteError
                         billetes[x] = 0
