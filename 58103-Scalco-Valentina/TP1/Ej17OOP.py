@@ -17,7 +17,7 @@ class Venta:
                "monto": str(self.lista[1]),
                "descripcion": str(self.lista[2]),
                "formapago": str(self.lista[3].replace("\n", ""))}
-            self.dic["venta numero" + str(i)] = self.ventas
+            self.dic["venta numero " + str(i)] = self.ventas
             i += 1
         return self.dic
 

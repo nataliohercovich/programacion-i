@@ -21,7 +21,7 @@ class Venta:
                     "monto": lista[1],
                     "descripcion": lista[2],
                     "formapago": lista[3].replace("\n", "")}
-                self.dic["venta numero" + str(i)] = ventas
+                self.dic["venta numero " + str(i)] = ventas
                 i += 1
             except ErrorDataInvalida:
                 print("\n\nOcurrió un problema con la fuente de datos\n\n")
